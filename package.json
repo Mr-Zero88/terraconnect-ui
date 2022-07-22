@@ -1,11 +1,11 @@
 {
-  "name": "Terraconnect-UI",
+  "name": "terraconnect-ui",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.ts",
   "scripts": {
     "build": "tsc",
-    "start": "ts-node .",
+    "start": "node ./dist/index.js",
     "dev": "ts-node-dev .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
