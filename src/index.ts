@@ -35,7 +35,5 @@
 // tray.setContextMenu(menu);
 // tray.showMessage('Start');
 
-
-export * from './application';
-export * from './element';
-export * from './state';
+export { render } from './dom';
+export { createElement, Component } from './jsx-runtime';

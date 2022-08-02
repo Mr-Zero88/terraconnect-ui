@@ -2,7 +2,6 @@
   "name": "terraconnect-ui",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "start": "qode ./dist/index.js",
@@ -12,6 +11,30 @@
   "keywords": [],
   "author": "Mr.Zero88",
   "license": "ISC",
+  "files": ["dist"],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./jsx-runtime": {
+      "import": "./dist/jsx-runtime.js",
+      "require": "./dist/jsx-runtime.js",
+      "default": "./dist/jsx-runtime.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "dist/index.d.ts"
+      ],
+      "jsx-runtime": [
+        "dist/jsx-runtime.d.ts"
+      ]
+    }
+  },
   "dependencies": {
     "@nodegui/nodegui": "^0.56.0"
   },
