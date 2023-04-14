@@ -12,6 +12,7 @@
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
-    "allowUnreachableCode": true
+    "allowUnreachableCode": true,
+    "skipLibCheck": true
   }
 }

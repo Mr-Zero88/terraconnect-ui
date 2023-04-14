@@ -11,7 +11,9 @@
   "keywords": [],
   "author": "Mr.Zero88",
   "license": "ISC",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
     "./package.json": "./package.json",
     ".": {
@@ -35,10 +37,10 @@
       ]
     }
   },
-  "dependencies": {
-    "@nodegui/nodegui": "^0.56.0"
-  },
   "devDependencies": {
     "@types/node": "^18.0.6"
+  },
+  "dependencies": {
+    "terraconnect-state": "link:C:/Users/User/Documents/Repositories/Terraconnect-State"
   }
 }
