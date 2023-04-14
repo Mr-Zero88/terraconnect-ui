@@ -13,10 +13,7 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "allowUnreachableCode": true,
-<<<<<<< HEAD
-=======
     "skipDefaultLibCheck": true,
->>>>>>> 4f534ae6d3ad03f694e4917c5e667024093d910f
     "skipLibCheck": true
   }
 }
