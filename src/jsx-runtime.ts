@@ -229,13 +229,15 @@ export function jsx<T>(component: string | Component<any>, props: stateify<T> & 
     child[State.Modified].on((newValue, oldValue) => {
       if (oldValue != null) {
         if (typeof oldValue == 'object' && oldValue instanceof Element) {
-          element.removeChild(oldValue);
-          oldValue.dispatchEvent(new Event('unmount'));
+          if (element.parentElement != null && oldValue.parentElement == element) {
+            element.removeChild(oldValue);
+            oldValue.dispatchEvent(new Event('unmount'));
+          }
         } else {
           let node = Array.from(element.childNodes).filter(_ => _.nodeType == 3).find(_ => _.nodeValue?.trim() == oldValue.toString().trim());
           if (node)
             node.nodeValue = newValue?.toString() ?? null;
-            // element.removeChild(node);
+          // element.removeChild(node);
         }
       }
       if (newValue != null) {
@@ -248,6 +250,32 @@ export function jsx<T>(component: string | Component<any>, props: stateify<T> & 
       }
     });
   });
+  children[State.ChildModified].on((newValue, key, oldValue) => {
+    if (oldValue != null) {
+      if (typeof oldValue == 'object' && oldValue instanceof Element) {
+        if (element.parentElement != null && oldValue.parentElement == element) {
+          element.removeChild(oldValue);
+          oldValue.dispatchEvent(new Event('unmount'));
+        }
+      } else {
+        let node = Array.from(element.childNodes).filter(_ => _.nodeType == 3).find(_ => _.nodeValue?.trim() == oldValue.toString().trim());
+        if (node)
+          node.nodeValue = newValue?.toString() ?? null;
+        // element.removeChild(node);
+      }
+    }
+    if (newValue != null) {
+      if (typeof newValue == 'object' && newValue instanceof Element) {
+        element.append(newValue);
+        newValue.dispatchEvent(new Event('mount'));
+      } else {
+        // element.append(document.createTextNode(newValue.toString()));
+      }
+    }
+  });
+  // children[State.Modified].on((newValue, oldValue) => {
+  //   console.log('Modified', newValue, oldValue);
+  // })
 
   return element;
 }
