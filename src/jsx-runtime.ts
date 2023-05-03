@@ -87,6 +87,41 @@ export function jsx<T>(component: string | Component<any>, props: stateify<T> & 
     let tagName = "app" + camelToSnakeCase((component as any).name);
     tagName = tagName != "app-app" ? tagName : "app-root"
     _element = document.createElement(tagName);
+    if (_element == null)
+      throw new Error("document.createElement has returned null");
+    let __element: Element = _element;
+    let { children, ...rest } = props;
+    let attributes = State.createState(rest) as unknown as State.State<{[key: string | symbol | number]: unknown}>;
+    const setAttribute = (key: string | null, value: unknown) => {
+      if(key == null)
+        return;
+      if (value == null) {
+        if (element.hasAttribute(key))
+          element.removeAttribute(key);
+        return;
+      }
+      let data = "";
+      switch (typeof value) {
+        case "bigint":
+        case "boolean":
+        case "number":
+        case "string":
+          data = value.toString();
+          break;
+        case "object":
+          data = JSON.stringify(value);
+          break;
+        case "symbol":
+          data = `[Symbol ${value.description}]`;
+          break;
+        case "function":
+          data = `[Function ${value.name}]`;
+          break;
+      }
+      __element.setAttribute(key, data);
+    }
+    Object.entries<State.State<unknown>>(attributes).forEach(([key, state]) => setAttribute(key, state[State.Value]));
+    attributes[State.ChildModified].on((newValue, key) => setAttribute((typeof key == "string") ? key : null, newValue))
 
     // if (props.children != null) {
     //   if (isState(props.children)) {
