@@ -102,6 +102,8 @@ interface MouseEvent<T = Element, E = NativeMouseEvent> extends UIEvent<T, E> {
     movementY: number;
     pageX: number;
     pageY: number;
+    offsetX: number;
+    offsetY: number;
     relatedTarget: EventTarget | null;
     screenX: number;
     screenY: number;
