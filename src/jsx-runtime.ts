@@ -27,6 +27,8 @@ function createElement(type: string, props: any) {
           });
         else if (key == "value" && element instanceof HTMLInputElement)
           element.value = props[key];
+        else if (key == "className")
+          element.setAttribute('class', props[key]);
         else if (key.startsWith('on'))
           element.addEventListener(key.substring(2).toLowerCase(), props[key]);
         else
@@ -43,6 +45,8 @@ function createElement(type: string, props: any) {
           });
         else if (key == "value" && element instanceof HTMLInputElement)
           element.value = props[key][State.Value];
+        else if (key == "className")
+          element.setAttribute('class', props[key][State.Value]);
         else if (key.startsWith('on'))
           element.addEventListener(key.substring(2).toLowerCase(), props[key][State.Value]);
         else
@@ -52,6 +56,8 @@ function createElement(type: string, props: any) {
             Object.keys(props.style[State.Value]).forEach((key: string) => (element.style as { [key: string]: any })[key] = props.style[key][State.Value]);
           else if (key == "value" && element instanceof HTMLInputElement)
             element.value = props[key][State.Value];
+          else if (key == "className")
+            element.setAttribute('class', props[key][State.Value]);
           else if (key.startsWith('on'))
             element.addEventListener(key.substring(2).toLowerCase(), props[key][State.Value]);
           else
@@ -89,11 +95,10 @@ export function jsx<T>(component: string | Component<any>, props: stateify<T> & 
     _element = document.createElement(tagName);
     if (_element == null)
       throw new Error("document.createElement has returned null");
-    let __element: Element = _element;
     let { children, ...rest } = props;
-    let attributes = State.createState(rest) as unknown as State.State<{[key: string | symbol | number]: unknown}>;
+    let attributes = State.createState(rest) as unknown as State.State<{ [key: string | symbol | number]: unknown }>;
     const setAttribute = (key: string | null, value: unknown) => {
-      if(key == null)
+      if (key == null)
         return;
       if (value == null) {
         if (element.hasAttribute(key))
@@ -118,10 +123,35 @@ export function jsx<T>(component: string | Component<any>, props: stateify<T> & 
           data = `[Function ${value.name}]`;
           break;
       }
-      __element.setAttribute(key, data);
+      _element?.setAttribute(key.replaceAll('on', 'on-'), data);
     }
     Object.entries<State.State<unknown>>(attributes).forEach(([key, state]) => setAttribute(key, state[State.Value]));
-    attributes[State.ChildModified].on((newValue, key) => setAttribute((typeof key == "string") ? key : null, newValue))
+    attributes[State.ChildModified].on((newValue, key) => setAttribute((typeof key == "string") ? key : null, newValue));
+    var observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        if (mutation.type === "attributes" && mutation.attributeName) {
+          let prop = (attributes as State.State<{ [key: string]: unknown }>)[mutation.attributeName];
+          if (prop == null || prop[State.Value] == null)
+            return;
+          let value = _element?.getAttribute(mutation.attributeName);
+          if (!_element?.hasAttribute(mutation.attributeName) || value == null) {
+            prop[State.Value] = null;
+            return;
+          }
+          if (value === 'true' || value === 'false')
+            prop[State.Value] = value === 'true';
+          else if (value !== "" && !Number.isNaN(Number(value)))
+            prop[State.Value] = Number(value);
+          else if (value.startsWith("[Symbol") || value.startsWith("[Symbol"))
+            return;
+          else if ((value.startsWith("[") && value.endsWith("]")) || (value.startsWith("{") && value.endsWith("}")))
+            prop[State.Value] = JSON.parse(value);
+          else
+            prop[State.Value] = value;
+        }
+      });
+    });
+    observer.observe(_element, { attributes: true });
 
     // if (props.children != null) {
     //   if (isState(props.children)) {
@@ -149,8 +179,9 @@ export function jsx<T>(component: string | Component<any>, props: stateify<T> & 
       props.children = State.createState([]);
 
     _children = component(props as Parameters<Component>[0]);
-
-
+    (_element as Element & { component: typeof component }).component = component;
+    (_element as Element & { props: ({ children: typeof props.children }) }).props = State.createState({ ...attributes, children: props.children });
+    (_element as Element & { props: State.State<unknown> }).props[State.PreserveState] = true;
 
 
     // let rootChildren = props.children;
@@ -251,7 +282,8 @@ export function jsx<T>(component: string | Component<any>, props: stateify<T> & 
   let children = _children as State.State<Array<Element | string | number | boolean | null | undefined>>;
 
   // ToDo: fix state
-  (children.forEach as unknown as State.State<typeof children.forEach>)[State.Value](child => {
+  // (children.forEach as unknown as State.State<typeof children.forEach>)[State.Value](child => {
+  children.forEach[State.Value](child => {
     if (child[State.Value] != null) {
       let childValue = child[State.Value] as Element | string | number | boolean;
       if (typeof childValue == 'object' && childValue instanceof Element) {
