@@ -1,14 +1,13 @@
-import { Component } from "./jsx-runtime";
 import * as State from 'Terraconnect-State';
-import { NativeAnimationEvent, NativeClipboardEvent, NativeCompositionEvent, NativeDragEvent, NativeFocusEvent, NativeKeyboardEvent, NativeMouseEvent, NativePointerEvent, NativeTouchEvent, NativeTransitionEvent, NativeUIEvent, NativeWheelEvent} from './native';
+import { NativeAnimationEvent, NativeClipboardEvent, NativeCompositionEvent, NativeDragEvent, NativeFocusEvent, NativeKeyboardEvent, NativeMouseEvent, NativePointerEvent, NativeTouchEvent, NativeTransitionEvent, NativeUIEvent, NativeWheelEvent } from './native';
 
 type Booleanish = boolean | 'true' | 'false';
 
-interface ClassAttributes<T> {}
+interface ClassAttributes<T> { }
 type DetailedHTMLProps<E extends HTMLAttributes<T>, T> = { [K in keyof (ClassAttributes<T> & E)]: State.State<(ClassAttributes<T> & E)[K]> | (ClassAttributes<T> & E)[K] };
 // ({} as unknown as DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>).value
 
-interface SyntheticEvent<T = Element, E = Event> extends BaseSyntheticEvent<E, EventTarget & T, EventTarget> {}
+interface SyntheticEvent<T = Element, E = Event> extends BaseSyntheticEvent<E, EventTarget & T, EventTarget> { }
 type HTMLWebViewElement = HTMLElement;
 
 interface AbstractView {
@@ -16,136 +15,136 @@ interface AbstractView {
   document: Document;
 }
 
-interface SyntheticEvent<T = Element, E = Event> extends BaseSyntheticEvent<E, EventTarget & T, EventTarget> {}
+interface SyntheticEvent<T = Element, E = Event> extends BaseSyntheticEvent<E, EventTarget & T, EventTarget> { }
 interface ChangeEvent<T = Element> extends SyntheticEvent<T> {
   target: EventTarget & T;
 }
 interface ClipboardEvent<T = Element> extends SyntheticEvent<T, NativeClipboardEvent> {
-    clipboardData: DataTransfer;
+  clipboardData: DataTransfer;
 }
 
 interface CompositionEvent<T = Element> extends SyntheticEvent<T, NativeCompositionEvent> {
-    data: string;
+  data: string;
 }
 
 interface DragEvent<T = Element> extends MouseEvent<T, NativeDragEvent> {
-    dataTransfer: DataTransfer;
+  dataTransfer: DataTransfer;
 }
 
 interface PointerEvent<T = Element> extends MouseEvent<T, NativePointerEvent> {
-    pointerId: number;
-    pressure: number;
-    tangentialPressure: number;
-    tiltX: number;
-    tiltY: number;
-    twist: number;
-    width: number;
-    height: number;
-    pointerType: 'mouse' | 'pen' | 'touch';
-    isPrimary: boolean;
+  pointerId: number;
+  pressure: number;
+  tangentialPressure: number;
+  tiltX: number;
+  tiltY: number;
+  twist: number;
+  width: number;
+  height: number;
+  pointerType: 'mouse' | 'pen' | 'touch';
+  isPrimary: boolean;
 }
 
 interface FocusEvent<Target = Element, RelatedTarget = Element> extends SyntheticEvent<Target, NativeFocusEvent> {
-    relatedTarget: (EventTarget & RelatedTarget) | null;
-    target: EventTarget & Target;
+  relatedTarget: (EventTarget & RelatedTarget) | null;
+  target: EventTarget & Target;
 }
 
 interface FormEvent<T = Element> extends SyntheticEvent<T> {
 }
 
 interface InvalidEvent<T = Element> extends SyntheticEvent<T> {
-    target: EventTarget & T;
+  target: EventTarget & T;
 }
 
 interface ChangeEvent<T = Element> extends SyntheticEvent<T> {
-    target: EventTarget & T;
+  target: EventTarget & T;
 }
 
 interface KeyboardEvent<T = Element> extends UIEvent<T, NativeKeyboardEvent> {
-    altKey: boolean;
-    /** @deprecated */
-    charCode: number;
-    ctrlKey: boolean;
-    code: string;
-    /**
-     * See [DOM Level 3 Events spec](https://www.w3.org/TR/uievents-key/#keys-modifier). for a list of valid (case-sensitive) arguments to this method.
-     */
-    getModifierState(key: string): boolean;
-    /**
-     * See the [DOM Level 3 Events spec](https://www.w3.org/TR/uievents-key/#named-key-attribute-values). for possible values
-     */
-    key: string;
-    /** @deprecated */
-    keyCode: number;
-    locale: string;
-    location: number;
-    metaKey: boolean;
-    repeat: boolean;
-    shiftKey: boolean;
-    /** @deprecated */
-    which: number;
+  altKey: boolean;
+  /** @deprecated */
+  charCode: number;
+  ctrlKey: boolean;
+  code: string;
+  /**
+   * See [DOM Level 3 Events spec](https://www.w3.org/TR/uievents-key/#keys-modifier). for a list of valid (case-sensitive) arguments to this method.
+   */
+  getModifierState(key: string): boolean;
+  /**
+   * See the [DOM Level 3 Events spec](https://www.w3.org/TR/uievents-key/#named-key-attribute-values). for possible values
+   */
+  key: string;
+  /** @deprecated */
+  keyCode: number;
+  locale: string;
+  location: number;
+  metaKey: boolean;
+  repeat: boolean;
+  shiftKey: boolean;
+  /** @deprecated */
+  which: number;
 }
 
 interface MouseEvent<T = Element, E = NativeMouseEvent> extends UIEvent<T, E> {
-    altKey: boolean;
-    button: number;
-    buttons: number;
-    clientX: number;
-    clientY: number;
-    ctrlKey: boolean;
-    /**
-     * See [DOM Level 3 Events spec](https://www.w3.org/TR/uievents-key/#keys-modifier). for a list of valid (case-sensitive) arguments to this method.
-     */
-    getModifierState(key: string): boolean;
-    metaKey: boolean;
-    movementX: number;
-    movementY: number;
-    pageX: number;
-    pageY: number;
-    offsetX: number;
-    offsetY: number;
-    relatedTarget: EventTarget | null;
-    screenX: number;
-    screenY: number;
-    shiftKey: boolean;
+  altKey: boolean;
+  button: number;
+  buttons: number;
+  clientX: number;
+  clientY: number;
+  ctrlKey: boolean;
+  /**
+   * See [DOM Level 3 Events spec](https://www.w3.org/TR/uievents-key/#keys-modifier). for a list of valid (case-sensitive) arguments to this method.
+   */
+  getModifierState(key: string): boolean;
+  metaKey: boolean;
+  movementX: number;
+  movementY: number;
+  pageX: number;
+  pageY: number;
+  offsetX: number;
+  offsetY: number;
+  relatedTarget: EventTarget | null;
+  screenX: number;
+  screenY: number;
+  shiftKey: boolean;
 }
 
 interface TouchEvent<T = Element> extends UIEvent<T, NativeTouchEvent> {
-    altKey: boolean;
-    changedTouches: TouchList;
-    ctrlKey: boolean;
-    /**
-     * See [DOM Level 3 Events spec](https://www.w3.org/TR/uievents-key/#keys-modifier). for a list of valid (case-sensitive) arguments to this method.
-     */
-    getModifierState(key: string): boolean;
-    metaKey: boolean;
-    shiftKey: boolean;
-    targetTouches: TouchList;
-    touches: TouchList;
+  altKey: boolean;
+  changedTouches: TouchList;
+  ctrlKey: boolean;
+  /**
+   * See [DOM Level 3 Events spec](https://www.w3.org/TR/uievents-key/#keys-modifier). for a list of valid (case-sensitive) arguments to this method.
+   */
+  getModifierState(key: string): boolean;
+  metaKey: boolean;
+  shiftKey: boolean;
+  targetTouches: TouchList;
+  touches: TouchList;
 }
 
 interface UIEvent<T = Element, E = NativeUIEvent> extends SyntheticEvent<T, E> {
-    detail: number;
-    view: AbstractView;
+  detail: number;
+  view: AbstractView;
 }
 
 interface WheelEvent<T = Element> extends MouseEvent<T, NativeWheelEvent> {
-    deltaMode: number;
-    deltaX: number;
-    deltaY: number;
-    deltaZ: number;
+  deltaMode: number;
+  deltaX: number;
+  deltaY: number;
+  deltaZ: number;
 }
 
 interface AnimationEvent<T = Element> extends SyntheticEvent<T, NativeAnimationEvent> {
-    animationName: string;
-    elapsedTime: number;
-    pseudoElement: string;
+  animationName: string;
+  elapsedTime: number;
+  pseudoElement: string;
 }
 
 interface TransitionEvent<T = Element> extends SyntheticEvent<T, NativeTransitionEvent> {
-    elapsedTime: number;
-    propertyName: string;
-    pseudoElement: string;
+  elapsedTime: number;
+  propertyName: string;
+  pseudoElement: string;
 }
 
 export type EventHandler<E extends SyntheticEvent<any>> = { bivarianceHack(event: E): void }["bivarianceHack"];
@@ -387,14 +386,14 @@ interface DOMAttributes<T> {
 }
 
 export interface CSSProperties /*extends CSS.Properties<string | number>*/ {
-//   /**
-//    * The index signature was removed to enable closed typing for style
-//    * using CSSType. You're able to use type assertion or module augmentation
-//    * to add properties or an index signature of your own.
-//    *
-//    * For examples and more information, visit:
-//    * https://github.com/frenic/csstype#what-should-i-do-when-i-get-type-errors
-//    */
+  //   /**
+  //    * The index signature was removed to enable closed typing for style
+  //    * using CSSType. You're able to use type assertion or module augmentation
+  //    * to add properties or an index signature of your own.
+  //    *
+  //    * For examples and more information, visit:
+  //    * https://github.com/frenic/csstype#what-should-i-do-when-i-get-type-errors
+  //    */
 }
 
 // All the WAI-ARIA 1.1 attributes from https://www.w3.org/TR/wai-aria-1.1/
@@ -866,7 +865,7 @@ interface AnchorHTMLAttributes<T> extends HTMLAttributes<T> {
   referrerPolicy?: HTMLAttributeReferrerPolicy | undefined;
 }
 
-interface AudioHTMLAttributes<T> extends MediaHTMLAttributes<T> {}
+interface AudioHTMLAttributes<T> extends MediaHTMLAttributes<T> { }
 
 interface AreaHTMLAttributes<T> extends HTMLAttributes<T> {
   alt?: string | undefined;
@@ -1788,6 +1787,6 @@ interface IntrinsicElementsSVG {
 
 declare global {
   namespace JSX {
-    interface IntrinsicElements extends IntrinsicElementsHTML, IntrinsicElementsSVG {}
+    interface IntrinsicElements extends IntrinsicElementsHTML, IntrinsicElementsSVG { }
   }
 }
