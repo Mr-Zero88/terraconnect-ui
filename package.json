@@ -41,6 +41,6 @@
     "@types/node": "^18.0.6"
   },
   "dependencies": {
-    "terraconnect-state": "link:C:/Users/User/Documents/Repositories/Terraconnect-State"
+    "terraconnect-state": "link:../terraconnect-state"
   }
 }
