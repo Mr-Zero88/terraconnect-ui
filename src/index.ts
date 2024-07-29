@@ -1,5 +1,5 @@
 import { MouseEventHandler } from './dom';
-import { ChildModified, Modified, PreserveState, State, Value, createState, isState } from 'Terraconnect-State';
+import { ChildModified, Modified, PreserveState, State, Value, createState, isState } from 'terraconnect-state';
 export { MouseEventHandler };
 
 export type stateify<T> = { [K in keyof T]: State<T[K]> | T[K] };

@@ -1,4 +1,4 @@
-import * as State from 'Terraconnect-State';
+import * as State from 'terraconnect-state';
 import { NativeAnimationEvent, NativeClipboardEvent, NativeCompositionEvent, NativeDragEvent, NativeFocusEvent, NativeKeyboardEvent, NativeMouseEvent, NativePointerEvent, NativeTouchEvent, NativeTransitionEvent, NativeUIEvent, NativeWheelEvent } from './native';
 
 type Booleanish = boolean | 'true' | 'false';
