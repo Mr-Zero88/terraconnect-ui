@@ -219,7 +219,7 @@ interface DOMAttributes<T> {
   // onInputCapture?: FormEventHandler<T> | undefined;
   // onReset?: FormEventHandler<T> | undefined;
   // onResetCapture?: FormEventHandler<T> | undefined;
-  // onSubmit?: FormEventHandler<T> | undefined;
+  onSubmit?: FormEventHandler<T> | undefined;
   // onSubmitCapture?: FormEventHandler<T> | undefined;
   // onInvalid?: FormEventHandler<T> | undefined;
   // onInvalidCapture?: FormEventHandler<T> | undefined;
