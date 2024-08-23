@@ -40,7 +40,8 @@
     }
   },
   "devDependencies": {
-    "@types/node": "^18.0.6"
+    "@types/node": "^18.0.6",
+    "typescript": "^5.5.4"
   },
   "dependencies": {
     "terraconnect-state": "github:Mr-Zero88/terraconnect-state"
