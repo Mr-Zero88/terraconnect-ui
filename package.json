@@ -12,10 +12,6 @@
   "keywords": [],
   "author": "Mr.Zero88",
   "license": "ISC",
-  "files": [
-    "dist",
-    "src"
-  ],
   "main": "./dist/index.ts",
   "exports": {
     "./package.json": "./package.json",
