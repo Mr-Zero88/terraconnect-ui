@@ -13,7 +13,8 @@
   "author": "Mr.Zero88",
   "license": "ISC",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "main": "./dist/index.ts",
   "exports": {
