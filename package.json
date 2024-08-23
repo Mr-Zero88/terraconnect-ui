@@ -43,6 +43,6 @@
     "@types/node": "^18.0.6"
   },
   "dependencies": {
-    "terraconnect-state": "https://github.com/Mr-Zero88/terraconnect-state.git"
+    "terraconnect-state": "github:Mr-Zero88/terraconnect-state"
   }
 }
