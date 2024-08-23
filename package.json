@@ -6,7 +6,8 @@
     "build": "tsc",
     "start": "qode ./dist/index.js",
     "dev": "ts-node-dev ./src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "pnpm build"
   },
   "keywords": [],
   "author": "Mr.Zero88",
@@ -14,6 +15,7 @@
   "files": [
     "dist"
   ],
+  "main": "./dist/index.ts",
   "exports": {
     "./package.json": "./package.json",
     ".": {
@@ -41,6 +43,6 @@
     "@types/node": "^18.0.6"
   },
   "dependencies": {
-    "terraconnect-state": "link:../terraconnect-state"
+    "terraconnect-state": "https://github.com/Mr-Zero88/terraconnect-state.git"
   }
 }
